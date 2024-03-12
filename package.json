@@ -1,0 +1,23 @@
+{
+  "name": "api_blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Maria-Villafuerte/blog_api.git"
+  },
+  "author": "Majo V",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Maria-Villafuerte/blog_api/issues"
+  },
+  "homepage": "https://github.com/Maria-Villafuerte/blog_api#readme",
+  "dependencies": {
+    "express": "^4.18.3"
+  }
+  "type" : "modeule",	
+}

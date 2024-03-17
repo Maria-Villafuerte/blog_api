@@ -1,5 +1,4 @@
-import conn from './conn.js'
-
+import conn from './conn'
 
 async function getAllPosts() {
   const [rows] = await conn.query('SELECT * FROM blog_posts')
@@ -32,4 +31,6 @@ async function updatePostById(title, content, author, category, tags, postId) {
   return result
 }
 
-export { createPost, getAllPosts, getById, deletebyID, updatePostById }
+export {
+  createPost, getAllPosts, getById, deletebyID, updatePostById,
+}

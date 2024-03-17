@@ -1,19 +1,29 @@
 import express from 'express'
+import cors from 'cors'
+import fs from 'fs'
+import swaggerUi from 'swagger-ui-express';
+import YAML from 'yamljs';
+
 import {
   getAllPosts, getById, createPost, updatePostById, deletebyID,
-} from './db'
+} from './db.js'
 
 const app = express()
-const port = 3000
+const port = 22129
+app.use(express.json());
+app.use(cors())
+const swaggerDocument = YAML.load('./swagger.yaml');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 
 app.get('/', async (req, res) => {
   res.send('HELLO FROM MY API')
 })
 
-// Ruta para obtener todos los posts
 app.get('/posts', async (req, res) => {
   try {
     const posts = await getAllPosts()
+    console.log('Posts from database:', posts); 
     res.status(200).json(posts)
   } catch (error) {
     console.error('Error al obtener los posts:', error)
@@ -21,7 +31,6 @@ app.get('/posts', async (req, res) => {
   }
 })
 
-// Ruta para obtener un post por ID
 app.get('/posts/:postId', async (req, res) => {
   try {
     const post = await getById(req.params.postId)
@@ -36,7 +45,6 @@ app.get('/posts/:postId', async (req, res) => {
   }
 })
 
-// Ruta para crear un nuevo post
 app.post('/posts', async (req, res) => {
   const {
     title, content, author, category, tags,
@@ -53,7 +61,6 @@ app.post('/posts', async (req, res) => {
   }
 })
 
-// Ruta para modificar un post por ID
 app.put('/posts/:postId', async (req, res) => {
   const {
     title, content, author, category, tags,
@@ -72,7 +79,6 @@ app.put('/posts/:postId', async (req, res) => {
   }
 })
 
-// Ruta para borrar un post por ID
 app.delete('/posts/:postId', async (req, res) => {
   try {
     await deletebyID(req.params.postId)
@@ -86,3 +92,17 @@ app.delete('/posts/:postId', async (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor en ejecución en http://localhost:${port}`)
 })
+
+app.use((err, req, res) => {
+  fs.appendFileSync('error.log', `Internal server error: ${err}\n`)
+  res.status(500).json({ error: 'Internal server error' })
+})
+
+app.use((req, res) => {
+  res.status(501).json({ error: 'Method not implemented' })
+})
+
+app.use((req, res) => {
+  res.status(404).json({ error: 'Not found' })
+})
+

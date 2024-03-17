@@ -1,0 +1,5 @@
+Hora: 2024-03-17T18:09:30.527Z, Endpoint: /posts, Método: GET, Payload: undefined, Respuesta: Error en el servidor
+Hora: 2024-03-17T18:11:14.662Z, Endpoint: /, Método: GET, Payload: undefined, Respuesta: HELLO FROM MY API
+Hora: 2024-03-17T18:11:31.348Z, Endpoint: /, Método: GET, Payload: undefined, Respuesta: HELLO FROM MY API
+Hora: 2024-03-17T18:12:41.009Z, Endpoint: /, Método: GET, Payload: undefined, Respuesta: HELLO FROM MY API
+Hora: 2024-03-17T18:13:25.086Z, Endpoint: /posts, Método: GET, Payload: undefined, Respuesta: Error en el servidor

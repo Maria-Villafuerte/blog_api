@@ -3,21 +3,29 @@ import cors from 'cors'
 import fs from 'fs'
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
-
 import {
   getAllPosts, getById, createPost, updatePostById, deletebyID,
 } from './db.js'
 
 const app = express()
-const port = 22129
-app.use(express.json());
+const port = 3000
+app.use(express.json);
 app.use(cors())
 const swaggerDocument = YAML.load('./swagger.yaml');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-
 app.get('/', async (req, res) => {
   res.send('HELLO FROM MY API')
+})
+
+
+app.get('/mi', async (req, res) => {
+  try {
+    console.log(await getAllPosts())
+  } catch (error) {
+    console.error('Error al obtener los posts:', error)
+    res.status(500).send('Error en el servidor')
+  }
 })
 
 app.get('/posts', async (req, res) => {

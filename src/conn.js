@@ -1,7 +1,7 @@
 import mysql from 'mysql2/promise'
 
 const pool = mysql.createPool({
-  host: 'localhost:22129',
+  host: 'localhost',
   user: 'MajoV',
   database: 'recipes_db',
   password: '1234',

@@ -1,10 +1,7 @@
+#513ae64f6e843fc3fb793d6c54086895f234d2a6b2bb886b3df19162df314116
 FROM ubuntu:latest
-
 RUN apt-get update && \
     apt-get install -y mysql-server
-
-
-
 
 # Use the official MySQL image as the base image
 FROM mysql:latest
@@ -17,7 +14,7 @@ ENV MYSQL_USER=MajoV
 ENV MYSQL_PASSWORD=1234
 
 # Add your schema SQL script to the docker-entrypoint-initdb.d directory
-COPY schema.sql /docker-entrypoint-initdb.d/
+COPY schema.sql /docker-entrypoint-initdb.d/schema.sql
 
 # Expose port 3306 to enable communication to/from the server
 EXPOSE 3306
